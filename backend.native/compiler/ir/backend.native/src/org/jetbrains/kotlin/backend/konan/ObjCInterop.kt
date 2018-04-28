@@ -18,11 +18,12 @@ package org.jetbrains.kotlin.backend.konan
 
 import org.jetbrains.kotlin.backend.konan.descriptors.findPackage
 import org.jetbrains.kotlin.backend.konan.descriptors.getStringValue
-import org.jetbrains.kotlin.backend.konan.irasdescriptors.annotations
-import org.jetbrains.kotlin.backend.konan.irasdescriptors.constructedClass
-import org.jetbrains.kotlin.backend.konan.irasdescriptors.getExternalObjCMethodInfo
-import org.jetbrains.kotlin.backend.konan.irasdescriptors.isReal
+import org.jetbrains.kotlin.backend.konan.irasdescriptors.*
 import org.jetbrains.kotlin.descriptors.*
+import org.jetbrains.kotlin.descriptors.ClassDescriptor
+import org.jetbrains.kotlin.descriptors.ConstructorDescriptor
+import org.jetbrains.kotlin.descriptors.FunctionDescriptor
+import org.jetbrains.kotlin.descriptors.PackageFragmentDescriptor
 import org.jetbrains.kotlin.incremental.components.NoLookupLocation
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrFunction
