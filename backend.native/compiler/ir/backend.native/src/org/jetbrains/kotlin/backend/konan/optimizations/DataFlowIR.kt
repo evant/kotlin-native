@@ -539,12 +539,6 @@ internal object DataFlowIR {
 
         private val FunctionDescriptor.internalName get() = getFqName(this).asString() + "#internal"
 
-        private fun choosePrimary(erasure: List<ClassDescriptor>): ClassDescriptor {
-            if (erasure.size == 1) return erasure[0]
-            // A parameter with constraints - choose class if exists.
-            return erasure.singleOrNull { !it.isInterface } ?: context.ir.symbols.any.owner
-        }
-
         fun mapFunction(descriptor: DeclarationDescriptor): FunctionSymbol = when (descriptor) {
             is FunctionDescriptor -> mapFunction(descriptor)
             is IrField -> mapPropertyInitializer(descriptor)
