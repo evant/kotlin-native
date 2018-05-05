@@ -220,22 +220,9 @@ fun IrModuleFragment.referenceAllTypeExternalClassifiers(symbolTable: SymbolTabl
 
         override fun visitDeclaration(declaration: IrDeclaration) {
             super.visitDeclaration(declaration)
-            declaration.annotations.forEach {
-                it.acceptVoid(object: IrElementVisitorVoid{
-                    override fun visitElement(element: IrElement) {
-                        element.acceptChildrenVoid(this)
-                    }
-
-                    override fun <T> visitConst(expression: IrConst<T>) {
-                        expression.type.referenceAllClassifiers()
-                    }
-
-                })
-                //handleClassReferences(it.annotation)
+            declaration.descriptor.annotations.getAllAnnotations().forEach {
+                handleClassReferences(it.annotation)
             }
-            //declaration.annotations.getAllAnnotations().forEach {
-            //    handleClassReferences(it.annotation)
-            //}
         }
 
         private fun handleClassReferences(annotation: AnnotationDescriptor) {

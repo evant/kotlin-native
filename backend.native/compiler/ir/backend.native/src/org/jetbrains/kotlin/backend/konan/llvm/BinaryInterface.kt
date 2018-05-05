@@ -237,14 +237,6 @@ internal val IrField.symbolName: String
 
     }
 
-private fun getStringValue(annotation: IrCall): String? {
-    return annotation.allValueArguments.values.ifNotEmpty {
-        val stringValue = single() as? StringValue
-        stringValue?.value
-    }
-}
-
-//TODO: old descriptor based fetching string value from annotation.
 private fun getStringValue(annotation: AnnotationDescriptor): String? {
     return annotation.allValueArguments.values.ifNotEmpty {
         val stringValue = single() as? StringValue
