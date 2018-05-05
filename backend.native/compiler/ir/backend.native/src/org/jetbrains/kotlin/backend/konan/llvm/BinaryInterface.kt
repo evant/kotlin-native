@@ -49,9 +49,6 @@ import org.jetbrains.kotlin.utils.addToStdlib.ifNotEmpty
  */
 internal tailrec fun DeclarationDescriptor.isExported(): Boolean {
     // TODO: revise
-    // TODO: please replace descriptorAnnotations to this.annotations, currently we can't use it because of lack cross
-    // module IrDeclaration serialiazation/deserialization.
-
     val descriptorAnnotations = this.descriptor.annotations
     if (descriptorAnnotations.hasAnnotation(symbolNameAnnotation)) {
         // Treat any `@SymbolName` declaration as exported.
@@ -206,7 +203,6 @@ internal val FunctionDescriptor.symbolName: String
         if (!this.isExported()) {
             throw AssertionError(this.descriptor.toString())
         }
-         // TODO: here and below description based fetching values should be replaced with Ir based.
         this.descriptor.annotations.findAnnotation(symbolNameAnnotation)?.let {
             if (this.isExternal) {
                 return getStringValue(it)!!
@@ -214,7 +210,6 @@ internal val FunctionDescriptor.symbolName: String
                 // ignore; TODO: report compile error
             }
         }
-        // TODO: see above.
         this.descriptor.annotations.findAnnotation(exportForCppRuntimeAnnotation)?.let {
             val name = getStringValue(it) ?: this.name.asString()
             return name // no wrapping currently required
